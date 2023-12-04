@@ -24,10 +24,11 @@ build-no-sqlite: deps-no-sqlite
 	cd cmd/writefreely; $(GOBUILD) -v -tags='netgo' -o $(BINARY_NAME)
 
 build-linux: deps
-	@hash xgo > /dev/null 2>&1; if [ $$? -ne 0 ]; then \
-		$(GOCMD) install src.techknowlogick.com/xgo@latest; \
-	fi
-	xgo --targets=linux/amd64, -dest build/ $(LDFLAGS) -tags='netgo sqlite' -go go-1.19.x -out writefreely -pkg ./cmd/writefreely .
+	# @hash xgo > /dev/null 2>&1; if [ $$? -ne 0 ]; then \
+	#	$(GOCMD) install src.techknowlogick.com/xgo@latest; \
+	# fi
+	$(GOINSTALL) $(LDFLAGS) -tags='netgo sqlite' ./cmd/writefreely
+
 
 build-windows: deps
 	@hash xgo > /dev/null 2>&1; if [ $$? -ne 0 ]; then \
